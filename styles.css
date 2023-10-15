@@ -27,8 +27,10 @@ p {
     background-color: rgba(44, 62, 80, 0.3); /* A subtle background to make the text pop */
     padding: 1.5rem; /* Added padding to make the text breathe inside its container */
     border-radius: 25px; /* Rounded edges to match other design elements */
-    max-width: 61.5%; /* Limit the width to ensure it doesn't span the full page width */
+    max-width: 60.5%; /* Limit the width to ensure it doesn't span the full page width */
     text-align: left; /* Center align the text for aesthetics */
+    margin-left: 1.1%;
+    padding-right: 2.1%;
     
 }
 

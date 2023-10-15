@@ -91,13 +91,13 @@ function setup() {
     volumeSlider.parent(controlsPanel);
 
     // Label and Slider for threshold
-    thresholdLabel = createElement("label", "Threshold:");
+    thresholdLabel = createElement("label", "Movement Detection Threshold:");
     thresholdSlider = createSlider(0, 255, 200);
     thresholdLabel.parent(controlsPanel);
     thresholdSlider.parent(controlsPanel);
     
     // Label and dropdown menu for scale selector
-    scalesLabel = createElement("label", "Choose a Scale:");
+    scalesLabel = createElement("label", "Choose a Musical Scale:");
     sel = createSelect();
     sel.option("Major", "major");
     sel.option("Minor", "minor");
@@ -219,7 +219,7 @@ function styleControls() {
     // Style the Scale dropdown and label
     scalesLabel.style("color", "#FFF");
     scalesLabel.style("font-size", "16px");
-    scalesLabel.style("margin-bottom", "15px");
+    scalesLabel.style("margin-bottom", "28px");
     sel.style("width", "298px");
     sel.style("background-color", "#444");
     sel.style("color", "#FFF");
@@ -230,7 +230,7 @@ function styleControls() {
     // Style the author label
     authorLabel.style("color", "#808080");
     authorLabel.style("font-size", "12px");
-    authorLabel.style("margin-top", "125px");
+    authorLabel.style("margin-top", "115px");
     authorLabel.style("text-align", "right");
 }
 
