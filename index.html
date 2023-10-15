@@ -3,14 +3,31 @@
   <head>
     <meta charset="UTF-8">
     <title>Webcam Piano</title>
+    <link rel="stylesheet" href="styles.css">
     <script src="libraries/p5.min.js" type="text/javascript"></script>
     <script src="libraries/p5.sound.min.js" type="text/javascript"></script>
     
     <script src="Grid.js" type="text/javascript"></script>
     <script src="sketch.js" type="text/javascript"></script>
+    <script></script>
 
     <style> body {padding: 0; margin: 0;} canvas {vertical-align: top;} </style>
   </head>
   <body>
+    <h1 class="main-heading"> Air Piano </h1>
+    <div id="main-container">
+        <div id="canvas-container"></div>
+        <div id="controls-panel"></div>
+    </div>
+    <div id="subtext-container">
+    <br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+    <br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+    <p class="subtext">Air Piano uses movement detection techniques to allow you to play the piano with nothing but a camera.<br><br>
+First, set the <b>movement detection threshold</b> to suit your camera and environment.  <br><br>
+Then, select the <b>musical scale</b> you'd like to play in.<br>
+                   <br> To find out more about this project, check out the <a href="https://github.com/daniel-maxwell/WebcamPiano/tree/main#readme">Github repo</a>
+    </p>
+    </div>
+    
   </body>
 </html>

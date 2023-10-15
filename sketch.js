@@ -1,22 +1,25 @@
-var video;
-var threshold = 200;
-var thresholdSlider;
-var button;
-var prevImg;
-var currImg;
-var diffImg;
-
-var grid;
-var imgNum;
+let video;
+let threshold = 200;
+let thresholdSlider;
+let button;
+let prevImg;
+let currImg;
+let diffImg;
+let grid;
+let imgNum;
 let currentScale = "major"; // Default scale
 let concurrentNoteCount = 0; // Keeps track of number of notes currently playing
 const MAX_CONCURRENT_SOUNDS = 3; // Maximum number of notes that can play at once
 let currentNote = null; // Keeps track of the most recently played note
 let noteCooldown = false; // Whether or not a note can be played
 const cooldownDuration = 200; // 1 second cooldown, adjust as needed
+let controlsPanel; // Div container for controls
 var sel; // Scale selector dropdown
 var scalesLabel; // Label for scale selector dropdown
 var thresholdLabel; // Label for threshold slider
+let volumeLabel; // Label for volume slider
+let volumeSlider; // Volume slider
+let authorLabel; // Label for author
 
 let pianoKeys = {}; // Object to store all piano keys
 const scales = {    // Object to store scales
@@ -56,33 +59,66 @@ function preload() {
 }
 
 function setup() {
-    createCanvas(640 * 2, 480);
+    cnv = createCanvas(480 * 2, 480);
+    cnv.parent('canvas-container');
+    cnv.style('box-shadow', '0px 0px 10px rgba(0, 0, 0, 0.5)');
+    cnv.style('border-bottom-right-radius', '25px');
+    cnv.style('border-top-right-radius', '25px');
+    
     pixelDensity(1);
     video = createCapture(VIDEO);
     video.hide();
     noStroke();
-    
+
+    // Create a div container for the controls
+    controlsPanel = createDiv('');
+    controlsPanel.parent('main-container');
+    controlsPanel.position('static');
+    controlsPanel.style('left', '62.4%');
+    controlsPanel.style('top', '16.2%');
+    controlsPanel.size(300, 440); // Width of 200px and same height as canvas
+    controlsPanel.style('background-color', '#333');
+    controlsPanel.style('padding', '20px');
+    controlsPanel.style('border-bottom-right-radius', '25px');
+    controlsPanel.style('border-top-right-radius', '25px');
+    controlsPanel.style('color', '#FFF');
+    controlsPanel.style('font-family', 'Arial, sans-serif');
+
+    // Label and Slider for volume
+    volumeLabel = createElement("label", "Volume:");
+    volumeSlider = createSlider(0, 1, 0.5, 0.01); // Ranges from 0 (muted) to 1 (full volume), with a default at 0.5 and a step of 0.01
+    volumeLabel.parent(controlsPanel);
+    volumeSlider.parent(controlsPanel);
+
     // Label and Slider for threshold
     thresholdLabel = createElement("label", "Threshold:");
     thresholdSlider = createSlider(0, 255, 200);
-    thresholdSlider.position(20, 500);
+    thresholdLabel.parent(controlsPanel);
+    thresholdSlider.parent(controlsPanel);
     
     // Label and dropdown menu for scale selector
     scalesLabel = createElement("label", "Choose a Scale:");
     sel = createSelect();
-    sel.position(20, 520);
     sel.option("Major", "major");
     sel.option("Minor", "minor");
     sel.selected("major");
     sel.changed(() => {
         currentScale = sel.value();
     });
+    scalesLabel.parent(controlsPanel);
+    sel.parent(controlsPanel);
+
+    // Label for author
+    authorLabel = createElement("label", "Made with ❤ by Daniel White");
+    authorLabel.parent(controlsPanel);
+
     styleControls(); // Call function to style the controls
+    positionCanvas();
     grid = new Grid(640, 480); // Create a new grid
 }
 
 function draw() {
-    background(0);
+    background(31, 40, 53);
     
     // Draw the video flipped on the x axis for intuitive piano playing
     push();
@@ -165,24 +201,50 @@ function draw() {
 
 // Style the controls
 function styleControls() {
+
+    // Style the Volume slider and label
+    volumeLabel.style("color", "#FFF");
+    volumeLabel.style("font-size", "16px");
+    volumeLabel.style("margin-bottom", "15px");
+    volumeSlider.style("width", "273px");
+    volumeSlider.style("margin-bottom", "45px");
+
     // Style the Threshold slider and label
-    thresholdLabel.position(20, 510);
-    thresholdLabel.style("color", "#000000");
-    thresholdLabel.style("font-family", "Helvetica");
-    thresholdSlider.position(110, 510);
-    thresholdSlider.style("width", "200px");
+    thresholdLabel.style("color", "#FFF");
+    thresholdLabel.style("font-size", "16px");
+    thresholdLabel.style("margin-bottom", "15px");
+    thresholdSlider.style("width", "273px"); // Adjusted width
+    thresholdSlider.style("margin-bottom", "40px");
 
     // Style the Scale dropdown and label
-    scalesLabel.position(350, 510);
-    scalesLabel.style("color", "#000000");
-    scalesLabel.style("font-family", "Helvetica");
-    sel.position(490, 505);
-    sel.style("width", "150px");
-    sel.style("background-color", "#222");
+    scalesLabel.style("color", "#FFF");
+    scalesLabel.style("font-size", "16px");
+    scalesLabel.style("margin-bottom", "15px");
+    sel.style("width", "298px");
+    sel.style("background-color", "#444");
     sel.style("color", "#FFF");
-    sel.style("border", "1px solid #888");
+    sel.style("border", "1px solid #555");
     sel.style("border-radius", "5px");
     sel.style("padding", "5px 10px");
+
+    // Style the author label
+    authorLabel.style("color", "#808080");
+    authorLabel.style("font-size", "12px");
+    authorLabel.style("margin-top", "125px");
+    authorLabel.style("text-align", "right");
+}
+
+function positionCanvas() {
+    cnv.center();
+    let x = (windowWidth - width) / 2;
+    let y = (windowHeight - height) / 4;
+    cnv.position(x, y);
+    controlsPanel.center();
+    controlsPanel.position(x + (width) - 320, y + 32);
+}
+
+function windowResized() {
+    positionCanvas();
 }
 
 // Attributions: 

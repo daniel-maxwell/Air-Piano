@@ -7,6 +7,7 @@ class Grid {
         this.noteSize = 40;
         this.notePos = [];
         this.noteState = [];
+        
 
         // initalise grid structure and state
         for (var x = 0; x < _w; x += this.noteSize) {
@@ -113,7 +114,7 @@ class Grid {
         );
         // Play the key
         const key = scales[currentScale][keyIndex];
-        pianoKeys[key].play(0, 1, 1, 0, 1.5); // Limit the note duration to 1.5 seconds
+        pianoKeys[key].play(0, 1, volumeSlider.value(), 0, 1.5); // Limit the note duration to 1.5 seconds
         currentNote = pianoKeys[key];
         concurrentNoteCount++;
 
