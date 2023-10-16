@@ -1,58 +1,5 @@
-/* Global Styles */
-
-h1 {
-    font-size: 4rem;
-    margin-bottom: 1rem;
-    text-align: center;
-    color: #f3f4f6;
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-    font-family:monospace
-}
-
-p .subtitle {
-    color: #f3f4f6;
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-    font-family:monospace
-}
-
-p {
-    align-content: left;
-    font-size: 1rem;
-    color: #f3f4f6;
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-    font-family:monospace;
-}
-
-.subtext {
-    background-color: rgba(44, 62, 80, 0.3); /* A subtle background to make the text pop */
-    padding: 1.5rem; /* Added padding to make the text breathe inside its container */
-    border-radius: 25px; /* Rounded edges to match other design elements */
-    max-width: 60.5%; /* Limit the width to ensure it doesn't span the full page width */
-    text-align: left; /* Center align the text for aesthetics */
-    margin-left: 1.1%;
-    padding-right: 2.1%;
-    
-}
-
-.subtext a {
-    color: #f39c12; /* Using the color scheme used elsewhere for consistency */
-    text-decoration: underline; /* Making it evident that it's a link */
-    transition: color 0.3s ease; /* Smooth transition for hover effect */
-}
-
-.subtext a:hover {
-    color: #f5d784; /* Slightly lighter shade on hover for feedback */
-}
-
-.subtext b {
-    color: #f5d784; /* Make the bold text stand out */
-}
-
-#main-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 20px; /* This will be the spacing between canvas and control panel */
+:root{
+    zoom: 125%;
 }
 
 body {
@@ -64,17 +11,58 @@ body {
     align-items: center;
 }
 
+h1 {
+    font-size: 4rem;
+    margin-bottom: 3rem;
+    text-align: center;
+    color: #f3f4f6;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    font-family:monospace
+}
+
+
+#main-container {
+    display: flex;
+    position: relative;
+    justify-content: center;
+    align-items: center;
+    width: 960px;
+    height: 480px;
+}
+
 canvas {
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    position: absolute;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     border-radius: 5px;
     box-shadow: 0px 0px 10px rgba;
     border-bottom-left-radius: 25px;
     border-top-left-radius: 25px;
-    margin: 2rem 0;
+    margin: 2rem 0;  
 }
 
-#canvas-container, #controls-panel {
-    margin: 0 10px; /* Adjust this value for desired spacing between the video and control panel */
+#canvas-container {
+    display: flex;
+}
+
+#defaultCanvas0 {
+    position: unset !important;
+}
+
+
+#controls-panel {
+    right: 500px !important;
+    position: absolute;
+    top: 0;
+    left: 641px;
+    width: 300px;
+    height: 440px;
+    background-color: rgb(51, 51, 51);
+    padding: 20px;
+    z-index: 10
 }
 
 /* Controls Styling */
@@ -114,4 +102,48 @@ input[type="range"]::-moz-range-thumb {
     background: #f39c12;
     border-radius: 50%;
     cursor: pointer;
+}
+
+
+p .subtitle {
+    color: #f3f4f6;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    font-family:monospace
+}
+
+p {
+    align-content: left;
+    font-size: 1rem;
+    color: #f3f4f6;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    font-family:monospace;
+    line-height: 1;
+}
+
+.subtext {
+    background-color: rgba(44, 62, 80, 0.3);
+    padding: 1.5rem;
+    border-radius: 25px;
+    width: 934px;
+    text-align: left;
+    margin-left: 20px;
+    margin-top: 25px;
+}
+
+.subtext a {
+    color: #f39c12;
+    text-decoration: underline;
+    transition: color 0.3s ease;
+}
+
+.subtext a:hover {
+    color: #f5d784;
+}
+
+.subtext b {
+    color: #f5d784;
+}
+
+i {
+    color: #cacccf;
 }

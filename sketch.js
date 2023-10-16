@@ -1,12 +1,11 @@
-let video;
-let threshold = 200;
-let thresholdSlider;
-let button;
-let prevImg;
-let currImg;
-let diffImg;
-let grid;
-let imgNum;
+let video; // Webcam feed
+let threshold = 200; // Threshold for background subtraction
+let thresholdSlider; // Slider for threshold
+let prevImg; // Previous frame of video
+let currImg; // Current frame of video 
+let diffImg; // Difference between previous and current frames
+let grid; // Grid object
+let imgNum; // Number of images in the reaction array
 let currentScale = "major"; // Default scale
 let concurrentNoteCount = 0; // Keeps track of number of notes currently playing
 const MAX_CONCURRENT_SOUNDS = 3; // Maximum number of notes that can play at once
@@ -59,12 +58,13 @@ function preload() {
 }
 
 function setup() {
+    // Canvas setup
     cnv = createCanvas(480 * 2, 480);
-    cnv.parent('canvas-container');
+    cnv.parent('main-container');
     cnv.style('box-shadow', '0px 0px 10px rgba(0, 0, 0, 0.5)');
     cnv.style('border-bottom-right-radius', '25px');
     cnv.style('border-top-right-radius', '25px');
-    
+    cnv.style('position', 'unset');
     pixelDensity(1);
     video = createCapture(VIDEO);
     video.hide();
@@ -72,11 +72,10 @@ function setup() {
 
     // Create a div container for the controls
     controlsPanel = createDiv('');
+    controlsPanel.id('controls-panel');
     controlsPanel.parent('main-container');
-    controlsPanel.position('static');
-    controlsPanel.style('left', '62.4%');
-    controlsPanel.style('top', '16.2%');
     controlsPanel.size(300, 440); // Width of 200px and same height as canvas
+    controlsPanel.style('display', 'absolute !important');
     controlsPanel.style('background-color', '#333');
     controlsPanel.style('padding', '20px');
     controlsPanel.style('border-bottom-right-radius', '25px');
@@ -239,8 +238,6 @@ function positionCanvas() {
     let x = (windowWidth - width) / 2;
     let y = (windowHeight - height) / 4;
     cnv.position(x, y);
-    controlsPanel.center();
-    controlsPanel.position(x + (width) - 320, y + 32);
 }
 
 function windowResized() {
